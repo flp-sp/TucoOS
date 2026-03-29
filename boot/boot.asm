@@ -10,6 +10,20 @@ start:
     mov sp, 0x7c00
     sti
 
+load_kernel:
+    mov ah, 0x02  
+    mov al, 10      
+    mov ch, 0       
+    mov dh, 0     
+    mov cl, 2 
+    mov bx, 0x1000
+    int 0x13
+    jc disk_error
+
+    in al, 0x92
+    or al, 2
+    out 0x92, al
+
 load_PM:
     cli
     lgdt[gdt_descriptor]
@@ -18,6 +32,8 @@ load_PM:
     mov cr0,eax
     jmp 0x08:PModeMain
 
+disk_error:
+    jmp $
 
 gdt_start:
     dd 0x00000000
@@ -54,25 +70,10 @@ PModeMain:
     mov ebp, 0x9c00
     mov esp, ebp
 
-    in al, 0x92
-    or al, 2
-    out 0x92, al
-
-    mov edi, 0xb8000
-    mov esi, msg
-println:
-    lodsb
-    cmp al, 0
-    je hang
-    mov ah, 0x02
-    mov [edi], ax
-    add edi, 2
-    jmp println
+    call 0x1000
 
 hang:
     jmp $
-
-msg: db "Bem vindo ao TucoOS",0
 
 times 510 - ($ - $$) db 0
 dw 0xaa55

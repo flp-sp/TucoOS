@@ -1,1 +1,6 @@
+.vscode/
 boot.bin
+entry.o
+kernel.bin
+kernel.o
+tucoOS.bin

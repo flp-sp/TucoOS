@@ -1,16 +1,34 @@
 # Tuco OS
-Sistema Operacional criado para propositos educacionais
+Sistema Operacional criado para propositos educacionais.
 
 ## Como rodar
-Para rodar sugiro usar o ```qemu``` como virtualizador assim como o [OS Dev Wiki](https://wiki.osdev.org/Expanded_Main_Page) orienta. Seguindo a orientação também foi usado o ```nasm``` como assembler.
+Para rodar sugiro usar o ```qemu``` como virtualizador assim como o [OS Dev Wiki](https://wiki.osdev.org/Expanded_Main_Page) orienta. Seguindo a orientação também foi usado o ```nasm``` como assembler e o ```gcc``` como compilador.
 
 ```
-nasm boot/boot.asm -f bin -o boot/boot.bin
+nasm -f bin boot/boot.asm -o boot.bin
 ```
 
 ```
-qemu-system-i386 -fda boot/boot.bin
+nasm -f elf32 kernel/entry.asm -o entry.o
+```
+
+```
+gcc -m32 -ffreestanding -fno-stack-protector -c kernel/kernel.c -o kernel.o
+```
+
+```
+ld -m elf_i386 -o kernel.bin -Ttext 0x1000 entry.o kernel.o --oformat binary
+```
+
+```
+cat boot.bin kernel.bin > tucoOS.bin
+```
+
+```
+qemu-system-i386 -fda tucoOS.bin
 ```
 
 ## Recursos
-Atualmente o arquivo ```boot.asm``` é apenas o esqueleto de um bootloader, ja que nao carrega o kernel em si, mas ele ja consegue ser reconhecido pela BIOS e fazer a transiçao do realmode(16 bits) para o protectedmode(32 bits) e exibir uma mensagem de boas vindas usando VGA.
+O projeto atualmente conta com o ```boot.asm```, um bootloader que inicia em real-mode(16 bits), carrega o kernel na memória e passa para o protected-mode(32 bits).
+
+O ```kernel.c``` é o núcleo do sistema operacional, no momento, ele apenas limpa a tela e exibe uma mensagem de boas vindas usando VGA.
