@@ -10,7 +10,6 @@ void main()
     echo("Seja bem vindo ao TucoOS - Kernel carregado!", cursor);
 
     cursor = print_char('\n', 0x07, cursor);
-
     shell(cursor);
     while (1);
 }

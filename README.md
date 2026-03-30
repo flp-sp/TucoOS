@@ -25,7 +25,7 @@ cat boot.bin kernel.bin > tucoOS.bin
 ```
 
 ```
-qemu-system-i386 -fda tucoOS.bin
+qemu-system-i386 -fda tucoOS.img
 ```
 
 ## Recursos

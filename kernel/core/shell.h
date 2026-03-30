@@ -4,6 +4,7 @@
 #include "../drivers/keyboard_handdle.h"
 #include "../stdlibs/tucoio.h"
 #include "video.h"
+#include "comands.h"
 
 static void shell(int cursor)
 {
@@ -49,6 +50,14 @@ static void shell(int cursor)
                 else if (scompare(buffer, "clear") == 0) // comando clear
                 {
                     cursor = clear(cursor);
+                }
+                else if (scompare(buffer, "help") == 0)
+                {
+                    cursor = help(cursor);
+                }
+                else if (scompare(buffer, "shutdown") == 0)
+                {
+                    shutdown();
                 }
                 else  
                 {

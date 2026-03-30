@@ -4,3 +4,4 @@ entry.o
 kernel.bin
 kernel.o
 tucoOS.bin
+tucoOS.img
