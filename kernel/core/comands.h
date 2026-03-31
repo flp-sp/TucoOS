@@ -38,6 +38,10 @@ static char* sum(char* n1, char* n2)
     static char correct_result[16];
     int result_lenght = 0;
 
+    int is_negt1 = 0;
+    int is_negt2 = 0;
+    int is_negt_greater = 0;
+
     int soma = 0;
     int int1 = 0;
     int int2 = 0;
@@ -51,7 +55,14 @@ static char* sum(char* n1, char* n2)
         }
         else if (i == 0)
         {
-            int1 += n1[i] - '0';
+            if (n1[i] == '-')
+            {
+                is_negt1 = 1;    
+            }
+            else
+            {
+                int1 += n1[i] - '0';
+            }
         }
     }
     for (int i = 0; n2[i] != '\0'; i++)
@@ -63,10 +74,45 @@ static char* sum(char* n1, char* n2)
         }
         else if (i == 0)
         {
-            int2 += n2[i] - '0';
+            if (n2[i] == '-')
+            {
+                is_negt2 = 1;    
+            }
+            else
+            {
+                int2 += n2[i] - '0';
+            }
         }
     }
+
+    if (is_negt1 == 1 || is_negt2 == 1)
+    {
+
+        if (int1 < int2 && is_negt2 == 1)
+        {
+            is_negt_greater = 1;
+        }
+        else if (int2 < int1 && is_negt1 == 1)
+        {
+            is_negt_greater = 1;
+        }
+    }
+
+    if (is_negt1 == 1)
+    {
+        int1 *= (-1);
+    }
+    if (is_negt2 == 1)
+    {
+        int2 *= (-1);
+    }
+
     soma = int1 + int2;
+
+    if (soma < 0)
+    {
+        soma *= (-1);
+    }
     for (int i = 0; i > -1; i++)
     {
         if (soma % 10 == 0 && soma > 0)
@@ -94,7 +140,30 @@ static char* sum(char* n1, char* n2)
         correct_result[i] = result[result_lenght - i - 1];
     }
     correct_result[result_lenght] = '\0';
-    return correct_result;
+    //correct_result[1] = *correct_result;
+    if ((is_negt1 == 1 || is_negt2 == 1) && is_negt_greater == 1)
+    {
+        for (int i = 1; i <= result_lenght; i++)
+        {
+            result[i] = correct_result[i - 1];
+        }
+
+        result[0] = '-';
+    }
+    else if (is_negt1 == 1 && is_negt2 == 1)
+    {
+        for (int i = 1; i <= result_lenght; i++)
+        {
+            result[i] = correct_result[i - 1];
+        }
+
+        result[0] = '-';
+    }
+    else
+    {
+        return correct_result;
+    }
+    return result;
 }
 
 #endif

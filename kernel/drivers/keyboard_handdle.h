@@ -55,6 +55,7 @@ static char get_key() {
         case 0x09: return '8';
         case 0x0A: return '9';
         case 0x0B: return '0';
+        case 0x0C: return '-';
         default: return 0;  
     }
 }
