@@ -33,4 +33,28 @@ static void echo(char* mensagem, int cursor) // comando para imprimir um texto e
         i++;
     }
 }
+
+static int bgststr(char* s1, char* s2) // testa qual a maior string
+{
+    int first_count = 0;
+    int second_count = 0;
+
+    for (int i = 0; s1[i] != '\0'; i++)
+    {
+        first_count++;
+    }
+
+    for (int i = 0; s2[i] != '\0'; i++)
+    {
+        second_count++;
+    }
+
+    if (first_count > second_count)
+        return 1;
+    else if (first_count < second_count)
+        return 2;
+    else if (first_count == second_count)
+        return 0;
+    return -1;
+}
 #endif

@@ -14,7 +14,7 @@ static void shell(int cursor)
     while (1)
     {
         // permite multiplas palavras por linha para flags
-        char words[2][64];
+        char words[3][64] = {{},{},{}};
         int word_index = 0;
         int char_index = 0;
 
@@ -58,6 +58,11 @@ static void shell(int cursor)
                 else if (scompare(buffer, "shutdown") == 0)
                 {
                     shutdown();
+                }
+                else if (scompare(words[0], "sum") == 0)
+                {
+                    cursor = ((cursor / 160) + 1) * 160;
+                    echo(sum(words[1], words[2]), cursor);
                 }
                 else  
                 {

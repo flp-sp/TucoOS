@@ -31,4 +31,16 @@ qemu-system-i386 -fda tucoOS.img
 ## Recursos
 O projeto atualmente conta com o ```boot.asm```, um bootloader que inicia em real-mode(16 bits), carrega o kernel na memória e passa para o protected-mode(32 bits).
 
-O ```kernel.c``` é o núcleo do sistema operacional, no momento, tem uma shell extremamente básica com os comandos ```clear``` para limpar a tela e ```echo``` para imprimir o que o usuario digitar a seguir.
+O ```kernel.c``` é o núcleo do sistema operacional, no momento, tem uma shell extremamente básica com alguns comandos de terminal. Tente usar:
+
+```
+tuco-OS~$ help
+```
+
+```
+echo - imprime uma mensagem na tela
+clear - limpa a tela
+help - exibe os comandos na tela
+shutdown - desliga o computador
+sum - soma dois inputs inteiros do teclado
+```
