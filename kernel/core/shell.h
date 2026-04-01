@@ -1,10 +1,10 @@
 #ifndef SHELL 
 #define SHELL
 
-#include "../drivers/keyboard_handdle.h"
+#include "../drivers/keyboard_handle.h"
 #include "../stdlibs/tucoio.h"
 #include "video.h"
-#include "comands.h"
+#include "commands.h"
 
 static void shell(int cursor)
 {
