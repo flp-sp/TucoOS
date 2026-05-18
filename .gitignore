@@ -1,7 +1,4 @@
 .vscode/
-boot.bin
-entry.o
-kernel.bin
-kernel.o
-tucoOS.bin
+docs/
+imgs/
 tucoOS.img
