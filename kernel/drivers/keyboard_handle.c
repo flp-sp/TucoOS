@@ -1,11 +1,5 @@
 #include "keyboard_handle.h"
-
-unsigned char inb(unsigned short porta)
-{
-    unsigned char ret;
-    __asm__ __volatile__ ("inb %1, %0" : "=a"(ret) : "Nd"(porta));
-    return ret;
-}
+#include "../stdlibs/tucoio.h"
 
 char get_key() {
     unsigned char scancode = 0;

@@ -8,7 +8,7 @@ ASFLAGS_ELF = -f elf32
 CFLAGS = -m32 -ffreestanding -fno-stack-protector -c
 LDFLAGS = -m elf_i386 -Ttext 0x1000 --oformat binary
 
-OBJS = entry.o kernel.o video.o shell.o tucoio.o keyboard_handle.o
+OBJS = entry.o kernel.o video.o shell.o tucoio.o keyboard_handle.o disk.o fs.o
 IMG = tucoOS.img
 
 all: $(IMG)
@@ -40,8 +40,14 @@ tucoio.o: kernel/stdlibs/tucoio.c
 keyboard_handle.o: kernel/drivers/keyboard_handle.c
 	$(CC) $(CFLAGS) $< -o $@
 
+disk.o: kernel/drivers/disk.c
+	$(CC) $(CFLAGS) $< -o $@
+
+fs.o: kernel/core/fs.c
+	$(CC) $(CFLAGS) $< -o $@
+
 run: $(IMG)
 	$(QEMU) -fda $(IMG)
 
-clean:
+clear:
 	rm -f *.o *.bin

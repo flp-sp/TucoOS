@@ -57,19 +57,21 @@ int bgststr(char* s1, char* s2) // testa qual a maior string
     return -1;
 }
 
-inline void outb(unsigned short port, unsigned char val)
+
+//inline
+void outb(unsigned short port, unsigned char val)
 {
     __asm__ __volatile__("outb %0,%1" : : "a"(val), "Nd"(port));
 }
 
-inline unsigned char inb(unsigned short port)
+unsigned char inb(unsigned short port)
 {
     unsigned char ret;
-    __asm__ __volatile__("inb %0,%1" : "=a"(ret) : "Nd"(port));
+    __asm__ __volatile__("inb %1,%0" : "=a"(ret) : "Nd"(port));
     return ret;
 }
 
-inline void inw_string(unsigned short port, void* addr, unsigned long count)
+void inw_string(unsigned short port, void* addr, unsigned long count)
 {
     __asm__ __volatile__("cld; rep; insw" : "+D"(addr), "+c"(port): "d"(port) : "memory");
 }
