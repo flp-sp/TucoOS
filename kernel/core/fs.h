@@ -2,7 +2,7 @@
 #define TUCOFS_H
 
 typedef struct __attribute__((packed)){
-    char file_name[8];
+    unsigned char file_name[8];
     char format[3];
     unsigned char type;
     unsigned char reserved[14];
@@ -21,5 +21,7 @@ typedef struct __attribute__((packed)){
 #define DATA_LBA (ROOT_DIR_LBA + ROOT_DIR_SECTORS)
 
 unsigned int cluster_to_lba(unsigned short cluster);
+
+void copy_filename(char* dest, char* src);
 
 #endif

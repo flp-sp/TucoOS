@@ -12,11 +12,11 @@ git clone https://github.com/flp-sp/TucoOS.git
 ```
 Depois basta rodar o Makefile:
 ```bash 
-Makefile run
+make run
 ```
 Para apagar os arquivos gerados use:
 ```bash 
-Makefile clean
+make clear
 ```
 >Isso não apaga a imagem do sistema operacional `tucoOS.img`
 

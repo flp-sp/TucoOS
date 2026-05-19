@@ -17,4 +17,6 @@ unsigned char inb(unsigned short port);
 
 void inw_string(unsigned short port, void* addr, unsigned long count);
 
+void outw_string(unsigned short port, void* addr, unsigned long count);
+
 #endif

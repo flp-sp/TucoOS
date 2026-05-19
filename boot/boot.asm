@@ -15,7 +15,7 @@ load_kernel:
     mov al, 10      
     mov ch, 0       
     mov dh, 0     
-    mov cl, 2 
+    mov cl, 25
     mov bx, 0x1000
     int 0x13
     jc disk_error

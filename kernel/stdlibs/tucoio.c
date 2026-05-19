@@ -75,3 +75,8 @@ void inw_string(unsigned short port, void* addr, unsigned long count)
 {
     __asm__ __volatile__("cld; rep; insw" : "+D"(addr), "+c"(port): "d"(port) : "memory");
 }
+
+void outw_string(unsigned short port, void* addr, unsigned long count)
+{
+    __asm__ __volatile__("cld; rep; outsw" : "+S"(addr), "+c"(count) : "d"(port) : "memory");
+}

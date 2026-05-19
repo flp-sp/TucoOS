@@ -14,7 +14,9 @@ IMG = tucoOS.img
 all: $(IMG)
 
 $(IMG): boot.bin kernel.bin
-	cat $^ > $@
+	dd if=/dev/zero of=$@ bs=512 count=2880
+	dd if=boot.bin of=$@ bs=512 conv=notrunc
+	dd if=kernel.bin of=$@ bs=512 seek=24 conv=notrunc
 
 boot.bin: boot/boot.asm
 	$(AS) $(ASFLAGS_BIN) $< -o $@
@@ -47,7 +49,7 @@ fs.o: kernel/core/fs.c
 	$(CC) $(CFLAGS) $< -o $@
 
 run: $(IMG)
-	$(QEMU) -fda $(IMG)
+	$(QEMU) -hda $(IMG)
 
 clear:
 	rm -f *.o *.bin
