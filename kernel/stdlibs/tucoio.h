@@ -9,4 +9,10 @@ void echo(char* mensagem, int cursor); // comando para imprimir um texto em verd
 
 int bgststr(char* s1, char* s2); // testa qual a maior string
 
+inline void outb(unsigned short port, unsigned char val);
+
+inline unsigned char inb(unsigned short port);
+
+inline void inw_string(unsigned short port, void* addr, unsigned long count);
+
 #endif
