@@ -12,7 +12,7 @@ start:
 
 load_kernel:
     mov ah, 0x02  
-    mov al, 10      
+    mov al, 30     
     mov ch, 0       
     mov dh, 0     
     mov cl, 25
