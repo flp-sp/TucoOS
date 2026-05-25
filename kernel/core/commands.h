@@ -15,15 +15,19 @@ static inline void shutdown()
 
 static int help(int cursor)
 {
-    char* comandos[5] = {
+    char* comandos[8] = {
         "echo - imprime uma mensagem na tela",
         "clear - limpa a tela",
         "help - exibe os comandos na tela",
         "shutdown - desliga o computador",
-        "sum - soma dois inputs inteiros do teclado"
+        "sum - soma dois inputs inteiros do teclado",
+        "mk - cria um novo arquivo",
+        "cat - mostra o conteudo de um arquivo",
+        "ls - lista os arquivos no diretorio raiz"
+
     };
 
-    for (int i = 0; i <= 4; i++)
+    for (int i = 0; i <= 7; i++)
     {
         cursor = ((cursor / 160) + 1) * 160;
         echo(comandos[i], cursor);

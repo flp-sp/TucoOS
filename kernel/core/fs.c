@@ -66,8 +66,14 @@ int fs_make(char* filename, char* content, int size)
 
             if (entry->file_name[0] == 0x00 || entry->file_name[0] == 0xe5)
             {
+                unsigned short free_cluster = get_free_cluster();
+                if (free_cluster == 0)
+                {
+                    return 0;
+                }
+
                 copy_filename(entry->file_name, filename);
-                entry->cluster_pointer = 2;
+                entry->cluster_pointer = free_cluster;
                 entry->file_size = size;
                 entry->type = 0x20;
 
@@ -88,7 +94,7 @@ int fs_make(char* filename, char* content, int size)
                     }
                     
                 }
-                write_disk_sector(cluster_to_lba(2), data_sector);
+                write_disk_sector(cluster_to_lba(free_cluster), data_sector);
                 return 1;
             }
         }
@@ -118,4 +124,24 @@ int fs_ls(int cursor)
         }
     }
     return cursor;
+}
+
+// pegar cluster livres dinamicamente
+unsigned short get_free_cluster()
+{
+    unsigned char fat_sectors[512];
+    unsigned short* fat = (unsigned short*) fat_sectors;
+
+    read_disk_sector(FAT_LBA, fat_sectors);
+
+    for (int i = 2; i < 512; i += 2)
+    {
+        if (fat[i] == 0x0000)
+        {
+            fat[i] = 0xffff;
+            write_disk_sector(FAT_LBA, fat_sectors);
+            return i;
+        }
+    }
+    return 0; // disco cheio
 }
