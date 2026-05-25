@@ -4,7 +4,7 @@
 
 int cursor = 0;
 
-void main()
+int main()
 {
     cursor = clear(cursor);
     echo("Seja bem vindo ao TucoOS - Kernel carregado!", cursor);
@@ -12,4 +12,5 @@ void main()
     cursor = print_char('\n', 0x07, cursor);
     shell(cursor);
     while (1);
+    return 0;
 }
