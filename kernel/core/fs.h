@@ -26,6 +26,7 @@ void copy_filename(unsigned char* dest, char* src);
 int fs_cat(char* file_name, char* out_buffer);
 int fs_make(char* filename, char* content, int size);
 int fs_ls(int cursor);
+int fs_rm(char* filename, int cursor);
 int fs_filename_compare(unsigned char* disk_name, char* input_name);
 unsigned short get_free_cluster();
 

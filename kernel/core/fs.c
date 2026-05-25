@@ -126,6 +126,30 @@ int fs_ls(int cursor)
     return cursor;
 }
 
+int fs_rm(char* filename, int cursor)
+{
+    unsigned char sector[512];
+    TOFS_DirEntry* entry;
+
+    for (int sec =0; sec < ROOT_DIR_SECTORS; sec++)
+    {
+        read_disk_sector(ROOT_DIR_LBA + sec, sector);
+        for (int i = 0; i < 512; i+= sizeof(TOFS_DirEntry))
+        {
+            entry = (TOFS_DirEntry*)&sector[i];
+
+            if (fs_filename_compare(entry->file_name, filename))
+            {
+                //cursor = ((cursor / 160) + 1) * 160;
+                entry->file_name[0] = 0xe5;
+                write_disk_sector(ROOT_DIR_LBA + sec, sector);
+            }
+        }
+        
+    }
+    return cursor;
+}
+
 // pegar cluster livres dinamicamente
 unsigned short get_free_cluster()
 {

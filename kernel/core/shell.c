@@ -83,6 +83,10 @@ void shell(int cursor)
                 {
                     cursor = fs_ls(cursor);
                 }
+                else if (scompare(words[0], "rm") == 0)
+                {
+                    cursor = fs_rm(words[1], cursor);
+                }
                 else  
                 {
                     cursor = ((cursor / 160) + 1) * 160;

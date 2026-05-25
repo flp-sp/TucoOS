@@ -67,6 +67,10 @@ tuco-OS~$ cat teste
 ola-mundo
 ```
 
+```bash
+tuco-OS~$ rm teste
+```
+
 ### 1. Estrutura principal
 ### Descritor do sistema de arquivos
 Nome | Valor
