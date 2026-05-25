@@ -2,6 +2,7 @@
 #include "../stdlibs/tucoio.h"
 #include "video.h"
 #include "commands.h"
+#include "fs.h"
 #include "shell.h"
 
 void shell(int cursor)
@@ -61,6 +62,26 @@ void shell(int cursor)
                 {
                     cursor = ((cursor / 160) + 1) * 160;
                     echo(sum(words[1], words[2]), cursor);
+                }
+                else if (scompare(words[0], "mk") == 0)
+                {
+                    //cursor = ((cursor / 160) + 1) * 160;
+                    int size = get_size_of(words[2]);
+                    fs_make(words[1], words[2], size);
+                }
+                else if (scompare(words[0], "cat") == 0)
+                {
+                    cursor = ((cursor / 160) + 1) * 160;
+                    char buffer_arquivo[512];
+
+                    if (fs_cat(words[1], buffer_arquivo))
+                    {
+                        echo(buffer_arquivo, cursor);
+                    }
+                }
+                else if (scompare(words[0], "ls") == 0)
+                {
+                    cursor = fs_ls(cursor);
                 }
                 else  
                 {

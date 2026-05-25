@@ -16,7 +16,7 @@ all: $(IMG)
 $(IMG): boot.bin kernel.bin
 	dd if=/dev/zero of=$@ bs=512 count=2880
 	dd if=boot.bin of=$@ bs=512 conv=notrunc
-	dd if=kernel.bin of=$@ bs=512 seek=24 conv=notrunc
+	dd if=kernel.bin of=$@ bs=512 seek=1 conv=notrunc
 
 boot.bin: boot/boot.asm
 	$(AS) $(ASFLAGS_BIN) $< -o $@

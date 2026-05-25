@@ -2,6 +2,7 @@
 
 void read_disk_sector(unsigned int lba, unsigned char* buffer)
 {
+    while(inb(0x1F7) & 0x80);
     outb(0x1F6, 0xE0 | ((lba >> 24) & 0x0F));
     outb(0x1F2, 1);
     outb(0x1F3, (unsigned char) lba);
@@ -16,6 +17,7 @@ void read_disk_sector(unsigned int lba, unsigned char* buffer)
 
 void write_disk_sector(unsigned int lba, unsigned char* buffer)
 {
+    while(inb(0x1F7) & 0x80);
     outb(0x1F6, 0xE0 | ((lba >> 24) & 0x0F));
     outb(0x1F2, 1);
     outb(0x1F3, (unsigned char) lba);

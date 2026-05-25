@@ -9,6 +9,7 @@ void echo(char* mensagem, int cursor); // comando para imprimir um texto em verd
 
 int bgststr(char* s1, char* s2); // testa qual a maior string
 
+int get_size_of(char* word);
 
 // inline asm
 void outb(unsigned short port, unsigned char val);

@@ -57,6 +57,36 @@ int bgststr(char* s1, char* s2) // testa qual a maior string
     return -1;
 }
 
+// funçao get size
+int get_size_of(char* word)
+{
+    int size = 0;
+    for (int i = 0; word[i] != '\0'; i++)
+    {
+        size++;
+    }
+
+    return size;
+}
+
+int fs_filename_compare(unsigned char* disk_name, char* input_name) {
+    for (int i = 0; i < 8; i++) {
+        char c = input_name[i];
+        
+        if (c == '\0') {
+            for (int j = i; j < 8; j++) {
+                if (disk_name[j] != 0x20 && disk_name[j] != 0x00) return 0;
+            }
+            return 1;
+        }
+
+        if ((unsigned char)c != disk_name[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 
 //inline
 void outb(unsigned short port, unsigned char val)
@@ -73,7 +103,7 @@ unsigned char inb(unsigned short port)
 
 void inw_string(unsigned short port, void* addr, unsigned long count)
 {
-    __asm__ __volatile__("cld; rep; insw" : "+D"(addr), "+c"(port): "d"(port) : "memory");
+    __asm__ __volatile__("cld; rep; insw" : "+D"(addr), "+c"(count): "d"(port) : "memory");
 }
 
 void outw_string(unsigned short port, void* addr, unsigned long count)
