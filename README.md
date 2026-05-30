@@ -23,7 +23,7 @@ make clear
 
 Caso queira rodar novamente sem compilar tudo novamente, apenas rode a imagem usando o qemu:
 ```bash
-qemu-system-i386 -fda tucoOS.img
+qemu-system-i386 -hda tucoOS.img
 ```
 Ou rode em qualquer outra máquina virtual de sua preferência.
 
